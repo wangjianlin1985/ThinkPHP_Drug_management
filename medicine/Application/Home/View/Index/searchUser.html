@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="__PUBLIC__/lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+                <link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap-select.min.css">
+	<script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap-select.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/wukong-ui.css">
+</head>
+
+<body>
+	<div class="row">
+    	<div class="col-lg-12">
+        	<ul class="breadcrumb wk-breadcrumb">
+            	<li><a href="#">药品信息管理系统</a></li>
+                <li><a href="#">用户管理</a></li>
+                <li><a href="#">用户列表</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-lg-12">
+        	<div class="panel panel-default wk-panel wk-table-tools-panel">
+            	<div class="panel-heading">
+                	用户查询 User Search
+                </div>
+                <div class="panel-body">
+                         <div class="form-inline">  
+                            <form action="__APP__/Home/Index/searchUser" method="POST">
+                        <div class="form-group">
+                            <label class="control-label wk-filed-label">用户名称: </label>
+                           <div class="input-group">
+                                    <input type="text" name="keyword" class="form-control wk-long-2col-input" id="mark" placeholder="请输入用户名称"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default wk-btn">搜&nbsp;&nbsp;索</button>
+                        <button id="updateUserPasswordBtn" type="button" class="btn btn-default wk-tool-btn">修改密码</button>
+                        <button id="deleteUserBtn" type="button" class="btn btn-default wk-tool-btn">删除</button>
+                        <button id="updateUserBtn" type="button" class="btn btn-default wk-tool-btn">编辑</button>
+                        </form>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-lg-12">
+        	<div class="panel panel-default  wk-panel">
+            	<table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>选择</th>
+                            <th>用户名称</th>
+                            <th>账户名</th>
+                            <th>登录密码</th>
+                            <th>用户角色</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <volist name="users" id="vo">
+                            <tr id="t_user_{$vo.id}">
+                                <td><input id="user_{$vo.id}" name="userRadio" type="radio" aria-label="选择"/></td>
+                                <td>{$vo.name}</td>
+                                <td>{$vo.account}</td>
+                                <td>· · · · · · · ·</td>
+                                <td>{$vo.grade}</td>
+                            </tr>
+                        </volist>
+	   </tbody>
+                    <tfoot>
+                        <tr>
+                        	<td colspan="13" class="wk-tfoot">共有记录 {$count} 条</td>
+                        </tr>
+                    </tfoot>
+            	</table>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteUserConfirm">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header wk-modal-header">
+                                        <button class="close" type="button" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4>系统提示</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        您确定要删除这些用户吗？
+                                    </div>
+                                    <div class="modal-footer wk-modal-footer">
+                                        <button id="deleteUserBtnOK"  type="submit" class="btn btn-default wk-btn" data-dismiss="modal">确定</button>
+                                        <button type="button" class="btn btn-default wk-tool-btn" data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="updateUserConfirm">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header wk-modal-header">
+                                        <button class="close" type="button" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4>编辑用户</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-inline">  
+                                            <form id="updateUserForm" method="POST">
+                            <div class="form-group">
+                                <label class="control-label wk-filed-label">用户名称: </label>
+                                 <div class="input-group">
+                                    <input required="required" name="new_name" type="text" class="form-control wk-normal-input" id="mark" placeholder="请输入用户名称"/>
+                                </div>
+                            </div>
+         
+                             <div class="form-group">
+                                <label class="control-label wk-filed-label">用户角色: </label>
+                                <select class="selectpicker" name="new_grade_id">
+                                    <option value="1">管理员</option>
+                                    <option value="2">售货员</option>
+                                </select>
+                            </div>
+                      
+                           </form>
+                        </div>
+                                    </div>
+                                    <div class="modal-footer wk-modal-footer">
+                                        <button id="updateUserBtnOK"  type="submit" class="btn btn-default wk-btn" data-dismiss="modal">确定</button>
+                                        <button type="button" class="btn btn-default wk-tool-btn" data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade" tabindex="-1" role="dialog" id="updateUserPasswordConfirm">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header wk-modal-header">
+                                        <button class="close" type="button" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4>修改登录密码</h4>
+                                    </div>
+                                    <form id="updateUserPasswordForm" method="POST">
+                                    <div class="modal-body">
+                                        <div class="form-inline">  
+                           
+                           
+                            <div class="form-group">
+                                <label class="control-label wk-filed-label">新密码: </label>
+                                <div class="input-group">
+                                    <input required="required" name="new_password" type="password" class="form-control wk-normal-input" id="mark" placeholder="请输入新密码"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label wk-filed-label">新密码: </label>
+                                <div class="input-group">
+                                    <input required="required" name="re_password" type="password" class="form-control wk-normal-input" id="mark" placeholder="请再次输入新密码"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                               <div id="updateUserPasswordInfo" class="wk-form-info"></div>
+                            </div>
+
+                      
+                           
+                        </div>
+                                    </div>
+                                    <div class="modal-footer wk-modal-footer">
+                                        <button id="updateUserPasswordBtnOK"  type="submit" class="btn btn-default wk-btn">确定</button>
+                                        <button type="button" class="btn btn-default wk-tool-btn" data-dismiss="modal">取消</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+<script>
+
+    $("#deleteUserBtn").on("click", function() {
+        var id = "";
+        $(":radio").each(function() {
+            if ($(this).is(":checked")) {
+                id = $(this).attr("id").substr(5, $(this).attr("id").length);
+            }
+        });
+
+        if (id != "") {
+            $("#deleteUserConfirm").modal();
+            $("#deleteUserBtnOK").on("click", function() {
+                location.href = "__APP__/Home/Index/deleteUser/?id=" + id;
+            });
+        }
+    });
+
+    
+
+     $("#updateUserBtn").on("click", function() {
+        var id = "";
+        $(":radio").each(function() {
+            if ($(this).is(":checked")) {
+                id = $(this).attr("id").substr(5, $(this).attr("id").length);
+            }
+        });
+
+        $("input[name='new_name']").val($("#t_user_" + id).children('td').eq(1).html());
+        if ($("#t_user_" + id).children('td').eq(4).html() == "管理员") {
+            $("select[name='new_grade_id']").selectpicker('val',(1));
+        } else {
+            $("select[name='new_grade_id']").selectpicker('val',(2));
+        }
+        
+
+        if (id != "") {
+            $("#updateUserConfirm").modal();
+            $("#updateUserBtnOK").on("click", function() {
+                $("#updateUserForm").attr("action", "__APP__/Home/Index/updateUser?id=" + id);
+                 $("#updateUserForm").submit();
+            })
+        }
+    });
+
+     $("#updateUserPasswordBtn").on("click", function() {
+        var id = "";
+        $(":radio").each(function() {
+            if ($(this).is(":checked")) {
+                id = $(this).attr("id").substr(5, $(this).attr("id").length);
+            }
+        });
+
+        if (id != "") {
+            $("#updateUserPasswordConfirm").modal();
+            $("#updateUserPasswordBtnOK").on("click", function() {
+                if ($("input[name='new_password']").val() == $("input[name='re_password']").val()) {
+                    $("#updateUserPasswordInfo").html("");
+                     $("#updateUserPasswordForm").attr("action", "__APP__/Home/Index/updateUserPassword?id=" + id);
+                } else {
+                     $("#updateUserPasswordInfo").html("两次密码不一致！");
+                }
+            })
+        }
+    });
+</script>
+	
+</body>
+</html>

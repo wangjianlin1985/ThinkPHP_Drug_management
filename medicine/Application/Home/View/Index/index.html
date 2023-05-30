@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>药品信息管理系统</title>
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="__PUBLIC__/lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/wukong-ui.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="banner" id="banner"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs wk-nav-menu" id="wk-nav-menu">
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-createPurchase" class="wk-main-menu-item">添加进货</a></li>
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-searchPurchase" class="wk-main-menu-item">进货记录查询</a></li>
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-createMedicine" class="wk-main-menu-item">录入药品</a></li>
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-searchMedicine" class="wk-main-menu-item">药品信息查询</a></li>
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-saleMedicine" class="wk-main-menu-item">药品销售</a></li>
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-searchStock" class="wk-main-menu-item">库存查询</a></li>
+                <li role="presentation"><a href="#" id="wk-menu-panel-item-searchUser" class="wk-main-menu-item">用户列表</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-2" id="wk-menu-panel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default wk-menu-panel-header">
+                        <div class="panel-body wk-menu-panel-body">
+                            管理面板 MENU
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-group wk-accordion-panel-group" id="accordion">
+                        <div class="panel panel-info wk-accordion-header">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" href="#purchaseMenu" data-parent="#accordion">进货管理</a>
+                            </div>
+                            
+                            <div id="purchaseMenu" class="panel-collapse collapse">    
+                                <div class="list-group wk-accordion-list-group">
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-createPurchase"> >&nbsp;&nbsp;添加进货</button>
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-searchPurchase"> >&nbsp;&nbsp;进货记录查询</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="panel panel-info wk-accordion-header">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" href="#medicineMenu" data-parent="#accordion">药品管理</a>
+                            </div>
+                           
+                            <div id="medicineMenu" class="panel-collapse collapse in">    
+                                <div class="list-group wk-accordion-list-group">
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-createMedicine"> >&nbsp;&nbsp;药品信息录入</button>
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-searchMedicine"> >&nbsp;&nbsp;药品信息查询</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-info wk-accordion-header">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" href="#saleMenu" data-parent="#accordion">销售管理</a>
+                            </div>
+                             <div id="saleMenu" class="panel-collapse collapse">    
+                                <div class="list-group wk-accordion-list-group">
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-saleMedicine"> >&nbsp;&nbsp;药品销售</button>
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-searchSaleMedicine"> >&nbsp;&nbsp;药品销售查询</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-info wk-accordion-header">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" href="#stockMenu" data-parent="#accordion">库存管理</a>
+                            </div>
+                           
+                            <div id="stockMenu" class="panel-collapse collapse">    
+                                <div class="list-group wk-accordion-list-group">
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-searchStock"> >&nbsp;&nbsp;药品库存查询</button>
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-processMedicine"> >&nbsp;&nbsp;过期药品处理</button>
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-searchMedicineProcess"> >&nbsp;&nbsp;药品处理记录查询</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="panel panel-info wk-accordion-header">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" href="#userMenu" data-parent="#accordion">用户管理</a>
+                            </div>
+                            <div id="userMenu" class="panel-collapse collapse">    
+                                <div class="list-group wk-accordion-list-group">
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-createUser"> >&nbsp;&nbsp;新增用户</button>
+                                    <button type="button" class="list-group-item" id="wk-menu-panel-item-searchUser"> >&nbsp;&nbsp;用户列表</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <div class="col-lg-10" style="padding:0px;">
+            <iframe id="mainFrame" src="__APP__/Home/Index/createMedicine" width="100%" frameborder="0" onload="changeFrameHeight()">
+            </iframe>
+         </div>
+    </div>
+    
+    <script>
+        function changeFrameHeight() {
+            var ifm= document.getElementById("mainFrame"); 
+            ifm.height = document.documentElement.clientHeight - $("#wk-nav-menu").height() - $("#banner").height() - 9;
+        }
+        window.onresize=function(){  
+             changeFrameHeight();  
+        } 
+        
+        changeMenuPanelHeight();
+        function changeMenuPanelHeight() {
+            var panel= $("#wk-menu-panel"); 
+            panel.height(document.documentElement.clientHeight - $("#wk-nav-menu").height() - $("#banner").height() - 3);
+            
+        }
+        window.onresize=function(){  
+             changeMenuPanelHeight();  
+        } 
+        
+        
+        $(".list-group-item").each(function() {
+            $(this).on("click", function() {
+                var url = "";
+                var id = $(this).attr("id").substr(19, $(this).attr("id").length);
+                
+                $("#mainFrame").attr("src",  "__APP__/Home/Index/" + id ); 
+            });
+        });
+
+        $(".wk-main-menu-item").each(function() {
+            $(this).on("click", function() {
+                var url = "";
+                var id = $(this).attr("id").substr(19, $(this).attr("id").length);
+                
+                $("#mainFrame").attr("src",  "__APP__/Home/Index/" + id ); 
+            });
+        });
+
+        
+
+    </script>
+
+</body>
+</html>

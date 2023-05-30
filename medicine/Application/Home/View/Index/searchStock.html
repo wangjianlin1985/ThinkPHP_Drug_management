@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="__PUBLIC__/lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+                <link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap-select.min.css">
+	<script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap-select.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/wukong-ui.css">
+</head>
+
+<body>
+	<div class="row">
+    	<div class="col-lg-12">
+        	<ul class="breadcrumb wk-breadcrumb">
+            	<li><a href="#">药品信息管理系统</a></li>
+                <li><a href="#">库存管理</a></li>
+                <li><a href="#">药品库存查询</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-lg-12">
+        	<div class="panel panel-default wk-panel wk-table-tools-panel">
+            	<div class="panel-heading">
+                	药品库存查询 Data Search
+                </div>
+                <div class="panel-body">
+                        <form action="__APP__/Home/Index/searchStock" method="POST">
+                         <div class="form-inline">  
+                        <div class="form-group">
+                            <label class="control-label wk-filed-label">药品名称: </label>
+                           <div class="input-group">
+                                    <input name="keyword" type="text" class="form-control wk-long-2col-input" placeholder="请输入药品名称"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default wk-btn">搜&nbsp;&nbsp;索</button>
+                    </div>
+                </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-lg-12">
+        	<div class="panel panel-default  wk-panel">
+            	<table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>性状</th>
+                            <th>成分</th>
+                            <th>功能主治</th>
+                            <th>生产厂家</th>
+                            <th>批准文号</th>
+                            <th>累计进货量</th> 
+                            <th>累计销售量</th> 
+                            <th>库存量</th> 
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <volist name="stocks" id="vo">
+                            <tr>
+                                <td>{$vo.name}</td>
+                                <td>{$vo.status}</td>
+                                <td>{$vo.component}</td>
+                                <td>{$vo.effect}</td>
+                                <td>{$vo.manufactor}</td>
+                                <td>{$vo.number}</td>
+                                <td>{$vo.purchase_amount}</td>
+                                <td>{$vo.sale_amount}</td>
+                                <td>{$vo.amount}</td>
+                            </tr>
+                        </volist>
+	   </tbody>
+                    <tfoot>
+                        <tr>
+                        	<td colspan="13" class="wk-tfoot">共有记录 {$count} 条</td>
+                        </tr>
+                    </tfoot>
+            	</table>
+            </div>
+        </div>
+</div>
+    
+	
+</body>
+</html>
